@@ -10,6 +10,8 @@
 
 .navbar{
     background: linear-gradient(to right, #8d4616 ,#ca813d);
+    box-shadow: 4px 4px 10px rgba(128, 128, 128, 0.836);
+
     display: flex;
     justify-content: space-between;
     align-items: center;
