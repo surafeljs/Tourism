@@ -7,7 +7,7 @@ export const NavBar=()=>{
         <>
         <nav className="navbar">
             <div className="logo">
-                <img src={navbarlogo} alt="" width={80} srcset="" />
+                <img src={navbarlogo} alt="logo" width={80}  />
                 <h1 >Tourism Ethiopia</h1>
             </div>
             <div className="navlink">

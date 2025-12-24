@@ -1,0 +1,32 @@
+section .img {
+ display:  flex;
+ justify-content: center;
+    margin-top: 25px;
+}
+ section .img {
+    position: relative;
+    
+}
+
+ section .img h2{
+    backdrop-filter: blur(12px)brightness(1.1);
+
+    position: absolute;
+    background-color: rebeccapurple;
+    top: 300px;
+    font-size: 1.5em;
+    color: white;
+    background-color: #c9813da6;
+    width: 82%;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+}
+section .img img{
+    border-radius: 20px;
+    box-shadow: 4px 4px10px rgba(0,0,0,0.15) ;
+
+    width: 90%;
+    height: 400px;
+    object-fit: cover;
+}
