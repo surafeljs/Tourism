@@ -15,7 +15,7 @@ export const NavBar=()=>{
 <Link to={'/gallery'}className="link">Gallery</Link>
 <Link to={'/videos'}className="link">Videos</Link>
 <Link to={'/about'}className="link">About</Link>
-<Link to={'/signup'}className="link">sign Up</Link>
+<Link to={'/Create'}className="link">Create</Link>
 
             </div>
         </nav>

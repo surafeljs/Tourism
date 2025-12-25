@@ -31,7 +31,7 @@ section .img img{
     box-shadow: 4px 4px 10px rgba(128, 128, 128, 0.836);
 
 
-    width: 90%;
+    width: 96%;
     height: 400px;
     object-fit: cover;
  
@@ -54,7 +54,7 @@ section .abay img{
 }
 section .abay .welcome{
     width: 40%;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: white;
     box-shadow: 4px 4px 10px rgba(128, 128, 128, 0.836);
     padding :0 60px 60px 60px;
