@@ -24,7 +24,9 @@ const navigate=useNavigate()
 if (res.data.status) {
   setsucces(res.data.result)
   seterrors([])
-  navigate('/')
+  // navigate('/')
+  window.location.href = '/';
+
 }
 
     } catch (err) {

@@ -1,13 +1,4 @@
-import React from 'react';
-import { NavBar } from '../components/navbar';
-export const Gallery=()=>{
-    return(
-<>
+import React from 'react'
+ export const Gallery=()=>{
 
-<NavBar/>
-</>
-
-
-        
-    )
 }

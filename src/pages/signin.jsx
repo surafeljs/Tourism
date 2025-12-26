@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/signin.css";
 import axios  from "axios";
 import { useNavigate } from 'react-router-dom'
+
 const Signin = ({Token,setToken}) => {
   const [email, setEmail] = useState();
 
@@ -25,8 +26,8 @@ try {
         
         
         seterrors([])
-        setToken(Token)
-        navigate('/')
+         window.location.href = '/';
+
 
       }
 } catch (error) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/about.css'
-import { NavBar } from '../components/navbar';
 import { CopyWrite } from '../components/copywrite';
 import lalibela from '../../public/images/about_img/lalibela (2).jpg'
 
@@ -12,7 +11,6 @@ export const About=()=>{
     return(
 <>
 
-<NavBar/>
 
 <div className="about">
     <h2 className="about_h1">About Us</h2>

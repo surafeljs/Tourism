@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavBar } from '../components/navbar';
 import { CopyWrite } from '../components/copywrite';
 import '../styles/copywrite.css'
 import '../styles/home.css'
@@ -19,7 +18,6 @@ export const Home=({token})=>{
     return(
 <>
 
-<NavBar/>
 {
     token && <h1>{token}</h1>
     
@@ -27,7 +25,7 @@ export const Home=({token})=>{
 
 <section>
 <div className="img">
-<img src={lalibela} alt="" srcset="" />
+<img src={lalibela} alt="lalibela"  />
 <h2>Ethiopia – Land of Origins</h2>
 
      </div>    
