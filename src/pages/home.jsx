@@ -3,16 +3,20 @@ import { NavBar } from '../components/navbar';
 import { CopyWrite } from '../components/copywrite';
 import '../styles/copywrite.css'
 import '../styles/home.css'
-
 import lalibela from '../../public/images/section/lalibela.jpg'
 import abay from '../../public/images/section/abay.jpeg'
 import lalibela1 from '../../public/images/section/lalibela (1).jpg'
 import konso from '../../public/images/section/konso.jpg'
 import sof from '../../public/images/section/sof.jpeg'
 import harar from '../../public/images/section/harar.jpeg'
+import { useEffect } from 'react';
 
 
 export const Home=()=>{
+
+
+
+
     return(
 <>
 

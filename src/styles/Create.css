@@ -1,5 +1,6 @@
 /* Container styling */
 .signup-container {
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,6 +11,9 @@
   
   /* Form styling */
   .signup-form {
+    background-color: rgba(0, 0, 0, 0.116);
+   
+
     background: #fff;
     padding: 2rem;
     border-radius: 10px;
