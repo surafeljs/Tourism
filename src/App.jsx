@@ -41,13 +41,13 @@ useEffect(() => {
 <Router>
   <Routes>
 
-    <Route path={'/'} element={  <Home token={token}></Home> }></Route>
+    <Route path={'/'} element={   <Home token={token} />  }></Route>
     <Route path={'/gallery'} element={ <Gallery/>}></Route>
     <Route path={'/videos'} element={ <Gallery/>}></Route>
     <Route path={'/about'} element={ <About/>}></Route>
     <Route path={'/contact'} element={ <Contact/>}></Route>
     <Route path={'/Create'} element={ <Create/>}></Route>
-    <Route path={'/signin'} element={ <Signin/>}></Route>
+    <Route path={'/signin'} element={ <Signin  token={token}  setToken={setToken}/>}></Route>
 
 
 

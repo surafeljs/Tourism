@@ -15,14 +15,16 @@ export const Home=({token})=>{
  
 
 
+
     return(
 <>
 
 <NavBar/>
-
 {
     token && <h1>{token}</h1>
+    
 }
+
 <section>
 <div className="img">
 <img src={lalibela} alt="" srcset="" />
