@@ -1,20 +1,47 @@
 import React, { useState } from "react";
 import "../styles/signin.css";
+import axios  from "axios";
+import { useNavigate } from 'react-router-dom'
+const Signin = ({setToken,token}) => {
+  const [email, setEmail] = useState();
 
-const Signin = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: ""
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const [password, setPassword] = useState();
+const[errors,seterrors]=useState([])
+const[success,setsucces]=useState([])
+const[loading,setloading]=useState(false)
+const navigate=useNavigate()
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    console.log("Sign in data:", formData);
-    // Add your sign-in logic here (API call, validation, etc.)
+
+try {
+      setloading(true)
+  const res = await axios.post(
+        "http://localhost:9000/login",
+        {  email, password },
+        { withCredentials: true }
+      );
+
+      if (res.data.status) {
+        
+        
+        seterrors([])
+        navigate('/')
+
+      }
+} catch (error) {
+  if (error.response) {
+    setsucces([])
+    seterrors(error.response.data.errors)
+        console.error("Backend error:", error.response.data.errors);
+    
+  }else{
+    console.log(error.message);
+    
+  }
+}finally{
+  setloading(false)
+}
+   
   };
 
   return (
@@ -26,25 +53,44 @@ const Signin = () => {
         <input
           type="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
+          disabled={loading}
           required
+       onChange={(e)=>setEmail(e.target.value)}
+        
+       
         />
 
         <label>Password</label>
         <input
+        disabled={loading}
           type="password"
           name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
+       onChange={(e)=>setPassword(e.target.value)}
+      
         />
+ {errors.map((err, index) => (
+  <div  key={index} style={{display:'flex',justifyContent:"center"}}>
+
+    <p  style={{ color: "red" }}>
+    {err.msg}
+  </p>
+
+  </div>
+))}
+
+{success && (
+  <p style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
+    {success}
+  </p>
+)}
+        
 <p className="signin-links">
-  <a href="/forgot-password">Forgot Password?</a>
-  <br />
+  
+  
   <span>Don’t have an account? <a href="/Create">Create</a></span>
 </p><br />
-        <button type="submit">Login</button>
+        <button  type="submit">{loading ? <p>Loading ...</p>: <p>login</p>}</button>
+
       </form>
     </div>
   );

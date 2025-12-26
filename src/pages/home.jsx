@@ -9,12 +9,10 @@ import lalibela1 from '../../public/images/section/lalibela (1).jpg'
 import konso from '../../public/images/section/konso.jpg'
 import sof from '../../public/images/section/sof.jpeg'
 import harar from '../../public/images/section/harar.jpeg'
-import { useEffect } from 'react';
 
 
-export const Home=()=>{
-
-
+export const Home=({token})=>{
+ 
 
 
     return(
@@ -22,6 +20,9 @@ export const Home=()=>{
 
 <NavBar/>
 
+{
+    token && <h1>{token}</h1>
+}
 <section>
 <div className="img">
 <img src={lalibela} alt="" srcset="" />
@@ -69,3 +70,21 @@ export const Home=()=>{
         
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Create.css";
 import axios from "axios";
-
+import {useNavigate}from 'react-router-dom'
 const Create = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -9,8 +9,8 @@ const Create = () => {
   const [password, setPassword] = useState("");
 const[error,seterrors]=useState([])
 const[success,setsucces]=useState([])
-const[already,setsalready]=useState([])
 
+const navigate=useNavigate()
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,11 +24,14 @@ const[already,setsalready]=useState([])
 if (res.data.status) {
   setsucces(res.data.result)
   seterrors([])
+  navigate('/')
 }
 
     } catch (err) {
       if (err.response) {
         console.error("Backend error:", err.response.data);
+  setsucces([])
+
     seterrors(err.response.data.errors);
       } else {
         console.error(err.message);
@@ -94,7 +97,7 @@ if (res.data.status) {
           <span>
             Already have an account? <a href="/signin">Sign In</a>
           </span>
-        </p>
+        </p><br />
 
         <button type="submit">Sign Up</button>
       </form>
