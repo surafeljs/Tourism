@@ -315,33 +315,30 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS,
   },
 });
-
-  await transporter.sendMail({
-    from: `"My App" <${process.env.EMAIL_USER}>`,
-    to: "user@example.com",
+const info={
+  from: `"My App" <${process.env.EMAIL_USER}>`,
+    to: `${email}`,
     subject: "Welcome",
     text: "Welcome to our app!",
     html: "<h1>Welcome</h1><p>Thanks for joining</p>",
-  }).then((send)=>{
-    res.json({
-      msg:"Email sent successfully",
-      info: send.messageId
+}
+   transporter.sendMail(info,(err,info)=>{
+    if (err) {
+     return  res.json({
+errors:[
+  {status:false},
+  {err:err.message},
+  {msg:"Email Not sent successfully"}
+  
+]  
     })
-  }).catch((err)=>{
-    res.status(500).json({
-      errors:[
-        {status:false},
-        {msg:"Email not sent"}
-      ]
-    })
-  })
-
-
-return res.json({
-    errors:[
-      {status:true},
-      {msg:'send to email'}
-    ]
+    }else{
+     return res.json({
+        sttus:true,
+        msg:"Email sent successfully",
+        info:info.messageId
+      })
+    }
   })
 
 
