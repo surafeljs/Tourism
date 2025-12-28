@@ -26,7 +26,7 @@ try {
         
         
         seterrors([])
-         window.location.href = '/';
+        //  window.location.href = '/';
 
 
       }
@@ -88,7 +88,7 @@ try {
         
 <p className="signin-links">
   
-  
+  <span>forgote <a href="/forgote">forgote</a></span>
   <span>Don’t have an account? <a href="/Create">Create</a></span>
 </p><br />
         <button  type="submit">{loading ? <p>Loading ...</p>: <p>login</p>}</button>

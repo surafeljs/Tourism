@@ -147,7 +147,7 @@ res.cookie('token', token, {
   return res.json({
     status: true,
     result: 'Account created successfully',
-    token:token
+  
    
   });
 
@@ -278,7 +278,7 @@ if (!match) {
 
 
 
-router.post('/forgate',body('email').trim().isEmail().withMessage("Email is required"),async(req,res)=>{
+router.post('/forgote',body('email').trim().isEmail().withMessage("Email is required"),async(req,res)=>{
 
   
                        const{email}=req.body
@@ -294,19 +294,18 @@ router.post('/forgate',body('email').trim().isEmail().withMessage("Email is requ
 try {
   const user =await pg_connection.query("SELECT *FROM create_account WHERE email = $1 ",[email])
   
-const select_user_count=user.rowCount
-const select_email=user.rows[0].email
-console.log(select_user_count);
+const select_user_id=user.rows[0].user_id
+const token=jwt.sign({user_id:select_user_id},process.env.JWTSECRET,{expiresIn:'5m'})
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: false,        // true ONLY for HTTPS
+  sameSite: "lax",      // IMPORTANT
+  maxAge: 5 * 60 * 1000
+});
 
-if (select_user_count === 0) {
-  console.log('user not found');
-  return res.status(400).json({
-    errors:[
-      {status:false},
-      {msg:'user not found'}
-    ]
-  })
-}
+
+const link=`http://localhost:5173/reset/${token}`
+
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -319,9 +318,18 @@ const info={
   from: `"My App" <${process.env.EMAIL_USER}>`,
     to: `${email}`,
     subject: "Welcome",
-    text: "Welcome to our app!",
-    html: "<h1>Welcome</h1><p>Thanks for joining</p>",
+    html: `
+  <h1>Welcome</h1>
+  <div>
+    <p>Password reset link:</p>
+    <a href="${link}">Reset Password</a>
+  </div>
+`,
+
 }
+
+
+
    transporter.sendMail(info,(err,info)=>{
     if (err) {
      return  res.json({
@@ -334,15 +342,18 @@ errors:[
     })
     }else{
      return res.json({
-        sttus:true,
+        status:true,
         msg:"Email sent successfully",
-        info:info.messageId
+        token:token
       })
     }
   })
 
 
-  
+
+
+
+
 } catch (error) {
   
 }
@@ -355,12 +366,42 @@ errors:[
 
 
 
+router.post('/reset_password/:token', async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
 
+  try {
+    if (!password) {
+      return res.status(400).json({ status: false, msg: 'Password is required' });
+    }
 
+    // Verify token and extract user_id
+    const decoded = jwt.verify(token, process.env.JWTSECRET); // make sure to set your secret
+    const user_id = decoded.user_id;
 
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Update in DB
+    const update = await pg_connection.query(
+      "UPDATE create_account SET password = $1 WHERE user_id = $2 RETURNING *",
+      [hashedPassword, user_id]
+    );
 
+    if (update.rowCount === 0) {
+      return res.status(404).json({ status: false, msg: 'User not found' });
+    }
 
+    res.json({ status: true, msg: 'Password updated successfully' });
+
+  } catch (error) {
+    console.error(error);
+    if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+      return res.status(401).json({ status: false, msg: 'Invalid or expired token' });
+    }
+    res.status(500).json({ status: false, msg: 'Internal server error' });
+  }
+});
 
 
 
@@ -393,7 +434,6 @@ router.get('/logout', (req, res) => {
 //dashbord
 router.get('/dashbord', async (req, res) => {
   const token = req.cookies.token
-  const secret = process.env.JWTSECRET
 
   if (!token) {
     return res.json({

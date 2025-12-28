@@ -13,7 +13,8 @@ import Admin from './pages/admin'
 import { useEffect } from 'react';
 import axios from 'axios'
 import  Videos from './pages/video'
-
+import { FORGOT } from './pages/forgote'
+import { RESET } from './pages/reset_password'
 function App() {
  const [token, setToken] = useState(null);
  const [user, setUser] = useState(null);
@@ -106,6 +107,11 @@ const logout=async()=>{
     <Route path={'/contact'} element={ <Contact/>}></Route>
     <Route path={'/Create'} element={ <Create/>}></Route>
     <Route path={'/signin'} element={ <Signin  />}></Route>
+    <Route path={'/forgote'} element={ <FORGOT  />}></Route>
+    <Route path={'/reset/:id'} element={ <RESET  />}></Route>
+
+
+    
     <Route path={'/admin'} element={ <Admin token={token} user={user} isAdmin={isAdmin} />}></Route>
 
 
