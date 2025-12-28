@@ -1,0 +1,38 @@
+.admin-page{
+  padding:24px;
+  max-width:1000px;
+  margin:0 auto;
+}
+.admin-page h2{
+  margin:0 0 8px 0;
+}
+.welcome{
+  color: #666;
+  margin-bottom:16px;
+}
+.cards{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.card{
+  background:#fff;
+  border:1px solid #e6e6e6;
+  padding:16px;
+  border-radius:8px;
+  min-width:140px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.04);
+}
+.card h3{ margin:0 0 8px 0 }
+.card p{ font-size:20px; margin:0 }
+
+/* Users table & form */
+.users-section{ margin-top:20px }
+.user-form{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px }
+.user-form input{ padding:8px; border:1px solid #ddd; border-radius:6px }
+.user-form button{ padding:8px 12px; border-radius:6px; border:none; background:#2f80ed; color:#fff }
+.users-table{ width:100%; border-collapse:collapse; margin-top:12px }
+.users-table th, .users-table td{ text-align:left; padding:8px; border-bottom:1px solid #eee }
+.users-table button{ margin-right:8px; padding:6px 8px; border-radius:4px; border:1px solid #ddd; background:#fff }
+.users-table button:hover{ cursor:pointer }
+
