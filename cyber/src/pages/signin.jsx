@@ -26,7 +26,7 @@ try {
         
         
         seterrors([])
-        //  window.location.href = '/';
+         window.location.href = '/';
 
 
       }

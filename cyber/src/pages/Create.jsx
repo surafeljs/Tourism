@@ -28,7 +28,7 @@ if (res.data.status) {
   setsucces(res.data.result)
   seterrors([])
   // navigate('/')
-  // window.location.href = '/';
+  window.location.href = '/';
 
 }
 

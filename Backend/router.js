@@ -441,6 +441,25 @@ router.get('/dashbord', async (req, res) => {
       msg: ' not Unauthorized'
     })
   }
+try {
+const verify =jwt.verify(token,process.env.JWTSECRET)
+res.json({
+  status:true,
+  msg:verify
+})
+  
+} catch (error) {
+  if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+    return res.status(401).json({
+      errors:[
+        {status:false},
+        {msg:'invalide or Token expired'},
+
+      ]
+    })
+  }
+}
+
 
 
 });

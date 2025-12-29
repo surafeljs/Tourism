@@ -9,7 +9,6 @@ import { About } from './pages/about'
 import  Contact  from './pages/contact'
 import Create from './pages/Create'
 import Signin from './pages/signin'
-import Admin from './pages/admin'
 import { useEffect } from 'react';
 import axios from 'axios'
 import  Videos from './pages/video'
@@ -17,8 +16,8 @@ import { FORGOT } from './pages/forgote'
 import { RESET } from './pages/reset_password'
 function App() {
  const [token, setToken] = useState(null);
- const [user, setUser] = useState(null);
- const [isAdmin, setIsAdmin] = useState(false);
+ const [errror, setError] = useState();
+
 
 useEffect(() => {
     const fetchData = async () => {
@@ -28,18 +27,20 @@ useEffect(() => {
         });
 
         if (res.data.status) {
-          setUser(res.data.msg);
           setToken(res.data.msg.firstname);
-          setIsAdmin(Boolean(res.data.isAdmin));
         }
       } catch (err) {
-        console.error(err);
+      console.log(err);
+      
+        setError(err.response.data.errors)
       }
     };
 
     fetchData();
   }, []);
-
+if (errror) {
+  return
+}
 const logout=async()=>{
    try {
         const res = await axios.get("http://localhost:9000/logout",{withCredentials:true} );
@@ -73,8 +74,6 @@ const logout=async()=>{
   <Link to={'/videos'}className="link">Videos</Link>
   <Link to={'/about'}className="link">About</Link>
   <Link to={'/contact'}className="link">Contact</Link>
-              {isAdmin && <Link to={'/admin'} className="link">Admin</Link>}
-
   <Link className='link' onClick={logout}> Log Out</Link>  
               </div>
           </nav>  
@@ -90,7 +89,6 @@ const logout=async()=>{
   <Link to={'/videos'}className="link">Videos</Link>
   <Link to={'/about'}className="link">About</Link>
   <Link to={'/contact'}className="link">Contact</Link>
-
   <Link to={'/Create'}className="link">Create</Link>
   <Link to={'/signin'}className="link">Sign In</Link>
   
@@ -112,7 +110,6 @@ const logout=async()=>{
 
 
     
-    <Route path={'/admin'} element={ <Admin token={token} user={user} isAdmin={isAdmin} />}></Route>
 
 
 
