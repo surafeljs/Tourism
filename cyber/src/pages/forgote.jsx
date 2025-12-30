@@ -4,7 +4,7 @@ import { Box,Link, Button, Container, Paper, TextField, Typography, Alert } from
 import {} from '@mui/icons-material'
 import axios from "axios";
 export const FORGOT = () => {
-    const [email,setEmail]=useState()
+    const [email,setEmail]=useState("")
     const [error,setErrors]=useState([])
     const [success,setSuccess]=useState()
     const[loading,setLoading]=useState(false)
@@ -16,15 +16,16 @@ try {
   setLoading(true)
  const res= await  axios.post("http://localhost:9000/forgote",{email},{withCredentials:true})
     if (res.data.status) {
-        setErrors(null)
-        setSuccess(res.data.msg)
-        console.log(res.data.msg);
+        setSuccess( res.data.msg || "Password reset email sent successfully!")
+        setErrors([])
+
         
 
       }
 } catch (error) {
-  setSuccess(null)
         setErrors(error.response.data.errors)
+  setSuccess("")
+
 }finally{
   setLoading(false)
 }
@@ -32,6 +33,7 @@ try {
   return (
     <>
            <Container maxWidth="xs"  sx={{
+         
       mt:8,
       mb:10
            }} >
@@ -57,13 +59,22 @@ try {
       {
         error.map((err,index)=>(
 <div key={index}>
-           <Alert severity="error" variant="standard">{err.msg}</Alert>
+           <Alert severity="error" variant="standard"    onClose={() => setErrors([])}>{err.msg}</Alert>
 
   
 </div>
         ))
       }
-     {success && <Alert severity="success" variant="standard">{success}</Alert>}
+  {success && (
+                            <Alert 
+                                severity="success" 
+                                variant="outlined"
+                                sx={{ mb: 2 }}
+                                onClose={() => setSuccess("")}
+                            >
+                                {success}
+                            </Alert>
+                        )}
       <Button disabled={loading}  sx={{mt:2}} size="medium" fullWidth variant="outlined" type="submit">{loading ? <Typography>Loading . . .</Typography>:<Typography>send email</Typography>}</Button>
       
       </form>

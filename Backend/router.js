@@ -281,85 +281,101 @@ if (!match) {
 router.post('/forgote',body('email').trim().isEmail().withMessage("Email is required"),async(req,res)=>{
 
   
-                       const{email}=req.body
-  const errors=validationResult(req)
-                        if (!errors.isEmpty()) {
-                             console.log('Validation errors:', errors.array());
-            return res.status(400).json({
-                success: false,
-                errors: errors.array()
-            });
-                        }
+const { email } = req.body;
+const errors = validationResult(req);
+
+if (!errors.isEmpty()) {
+    console.log('Validation errors:', errors.array());
+    return res.status(400).json({
+        status: false,
+        errors: errors.array()
+    });
+}
 
 try {
-  const user =await pg_connection.query("SELECT *FROM create_account WHERE email = $1 ",[email])
-  
-const select_user_id=user.rows[0].user_id
-const token=jwt.sign({user_id:select_user_id},process.env.JWTSECRET,{expiresIn:'5m'})
-res.cookie("token", token, {
-  httpOnly: true,
-  secure: false,        // true ONLY for HTTPS
-  sameSite: "lax",      // IMPORTANT
-  maxAge: 5 * 60 * 1000
-});
+    // Check if user exists
+    const user = await pg_connection.query(
+        "SELECT * FROM create_account WHERE email = $1",
+        [email]
+    );
 
-
-const link=`http://localhost:5173/reset/${token}`
-
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-const info={
-  from: `"My App" <${process.env.EMAIL_USER}>`,
-    to: `${email}`,
-    subject: "Welcome",
-    html: `
-  <h1>Welcome</h1>
-  <div>
-    <p>Password reset link:</p>
-    <a href="${link}">Reset Password</a>
-  </div>
-`,
-
-}
-
-
-
-   transporter.sendMail(info,(err,info)=>{
-    if (!err) {
-  return res.json({
-        status:false,
-errors:[
-  {
-        msg:"Email not sent successfully",
-
-  }
-]      })  
-    
-    }else{
-     return res.json({
-        status:true,
-        msg:"Email sent successfully",
-        token:token
-      })
+    // IMPORTANT: Check if user was found
+    if (user.rows.length === 0) {
+        return res.status(404).json({
+            status: false,
+            errors: [{ msg: 'User not found' }]
+        });
     }
-  })
 
+    const select_user_id = user.rows[0].user_id;
+    
+    // Generate token
+    const token = jwt.sign(
+        { user_id: select_user_id },
+        process.env.JWTSECRET,
+        { expiresIn: '5m' }
+    );
 
+    // Set cookie
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure:false, // Secure in production
+        sameSite: "lax",
+        maxAge: 5 * 60 * 1000 // 5 minutes
+    });
 
+    const link = `http://localhost:5173/reset/${token}`;
 
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+        },
+    });
 
+    const mailOptions = {
+        from: `"My App" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: "Password Reset Request",
+        html: `
+            <h1>Password Reset</h1>
+            <div>
+                <p>Click the link below to reset your password. This link will expire in 5 minutes.</p>
+                <a href="${link}">Reset Password</a>
+                <p>If you didn't request this, please ignore this email.</p>
+            </div>
+        `,
+    };
+
+    // Send email and handle response properly
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            console.error('Email sending error:', err);
+            return res.status(500).json({
+                status: false,
+                errors: [{ msg: 'Failed to send email' }]
+            });
+        }
+        
+        console.log('Email sent:', info.response);
+        
+        // Return success response INSIDE the callback
+        return res.json({
+            status: true,
+            msg: "Password reset email sent successfully",
+            // Don't send token in response if it's in cookie
+        });
+    });
 
 } catch (error) {
-  
+    console.error('Server error:', error);
+    return res.status(500).json({
+        status: false,
+        errors: [{ msg: 'Server error' }]
+    });
 }
-
-
   
 
 })
