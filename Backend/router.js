@@ -331,15 +331,16 @@ const info={
 
 
    transporter.sendMail(info,(err,info)=>{
-    if (err) {
-     return  res.json({
+    if (!err) {
+  return res.json({
+        status:false,
 errors:[
-  {status:false},
-  {err:err.message},
-  {msg:"Email Not sent successfully"}
-  
-]  
-    })
+  {
+        msg:"Email not sent successfully",
+
+  }
+]      })  
+    
     }else{
      return res.json({
         status:true,

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "../styles/signin.css";
 import axios  from "axios";
 import {   useNavigate } from 'react-router-dom'
-import { Box,Link, Button, Container, Paper, TextField, Typography } from '@mui/material'
-const Signin = ({Token,setToken}) => {
+import { Box,Link, Button, Container, Paper, TextField, Typography, Alert } from '@mui/material'
+import {} from '@mui/icons-material'
+const Signin = () => {
   const [email, setEmail] = useState();
 
   const [password, setPassword] = useState();
@@ -49,49 +50,53 @@ try {
   return (
     <>
      <Container maxWidth="xs"  sx={{
-
-      mt:10,
-      mb:12
+mt:8,
+mb:10
      }} >
 <Paper  sx={{
-  
-  p:8
+     borderRadius:2,
+  px:5,
+  py:12
 }}  elevation={3} >
 
 <form onSubmit={handleSubmit}>
-  <Typography sx={{
+  <Typography   sx={{
+    fontStyle:'normal',
+    fontWeight:"bold",
     display:"flex",
     justifyContent:'center',
     alignItems:'center',
     mb:5
-  }} variant="h4">signin</Typography>
-  <TextField required  type="email" fullWidth label="Email" name="email" onChange={(e)=>setEmail(e.target.value)}></TextField>
-  <TextField sx={{
+  }} variant="h4">Login</Typography>
+  <TextField disabled={loading} size="small" required  type="email" autoFocus fullWidth label="Email" name="email" onChange={(e)=>setEmail(e.target.value)}></TextField>
+  <TextField disabled={loading} size="small" sx={{
     mt:3,
-    mb:2
+    mb:0.5
   }} type="password" fullWidth label="Password" name="password" onChange={(e)=>setPassword(e.target.value)}></TextField>
    
 
   
 
   {errors.map((err, index) => (
-  <div  key={index} style={{display:'flex',justifyContent:"center"}}>
+  <div  key={index} style={{display:'flex',justifyContent:"center" ,marginTop:8}}>
 
-    <Typography variant="caption"  style={{ color: "red" }}>
+    <Alert severity="error" variant="outlined"  style={{ color: "red" }}>
     {err.msg}
-  </Typography>
+  </Alert>
 
   </div>
 ))}
   {success && (
-  <Typography variant="caption" style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
+  <Typography  variant="caption" style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
     {success}  </Typography>
  )}
-<Button fullWidth variant="outlined" type="submit">{loading ? <Typography>Loading ...</Typography> : <Typography>Signin</Typography>}</Button>
-<Typography  sx={{
-  mt:2
-}}  variant="caption" className="flex  justify-end  gap-1">Forgote  <Link href="/forgote">Forgote</Link></Typography>
-  <Typography variant="caption" className="flex  justify-end gap-1 ">Don’t have an account? <Link href="/Create">Create</Link></Typography>
+ <Typography sx={{fontSize:11 ,textDecoration:'none'}} variant="caption" className="flex  justify-end  gap-1 items-center">Forgote  <Link href="/forgote" >forgote</Link></Typography>
+  <Typography sx={{
+  mb:1,
+  fontSize:11 ,textDecoration:'none'
+}}   variant="caption" className="flex  justify-end gap-1 ">Don’t have an account? <Link  sx={{}} href="/Create">Create</Link></Typography>
+<Button disabled={loading} size="medium" fullWidth variant="outlined" type="submit">{loading ? <Typography >Loading ...</Typography> : <Typography>Signin</Typography>}</Button>
+
 </form>
 
 
