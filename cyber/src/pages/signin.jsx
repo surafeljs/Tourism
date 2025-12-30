@@ -54,6 +54,7 @@ try {
       mb:12
      }} >
 <Paper  sx={{
+  
   p:8
 }}  elevation={3} >
 
@@ -76,17 +77,17 @@ try {
   {errors.map((err, index) => (
   <div  key={index} style={{display:'flex',justifyContent:"center"}}>
 
-    <p  style={{ color: "red" }}>
+    <Typography variant="caption"  style={{ color: "red" }}>
     {err.msg}
-  </p>
+  </Typography>
 
   </div>
 ))}
   {success && (
-  <p style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
-    {success}  </p>
+  <Typography variant="caption" style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
+    {success}  </Typography>
  )}
-<TextField   fullWidth type="submit"> </TextField>
+<Button fullWidth variant="outlined" type="submit">{loading ? <Typography>Loading ...</Typography> : <Typography>Signin</Typography>}</Button>
 <Typography  sx={{
   mt:2
 }}  variant="caption" className="flex  justify-end  gap-1">Forgote  <Link href="/forgote">Forgote</Link></Typography>
@@ -99,54 +100,7 @@ try {
     
     
     </>
-//     <div className="signin-container">
-//       <form className="signin-form" onSubmit={handleSubmit}>
-//         <h2>Sign In</h2>
 
-//         <label>Email</label>
-//         <input
-//           type="email"
-//           name="email"
-//           disabled={loading}
-//           required
-//        onChange={(e)=>setEmail(e.target.value)}
-        
-       
-//         />
-
-//         <label>Password</label>
-//         <input
-//         disabled={loading}
-//           type="password"
-//           name="password"
-//        onChange={(e)=>setPassword(e.target.value)}
-      
-//         />
-//  {errors.map((err, index) => (
-//   <div  key={index} style={{display:'flex',justifyContent:"center"}}>
-
-//     <p  style={{ color: "red" }}>
-//     {err.msg}
-//   </p>
-
-//   </div>
-// ))}
-
-// {success && (
-//   <p style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
-//     {success}
-//   </p>
-// )}
-        
-// <p className="signin-links">
-  
-//   <span>forgote <a href="/forgote">forgote</a></span><br />
-//   <span>Don’t have an account? <a href="/Create">Create</a></span>
-// </p><br />
-//         <button  type="submit">{loading ? <p>Loading ...</p>: <p>login</p>}</button>
-
-//       </form>
-//     </div>
   );
 };
 
