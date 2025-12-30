@@ -58,64 +58,6 @@ try {
 
 
 
-
-  <Button variant="outlined" onClick={() => setOpen(true)}>
-        Open Form Dialog
-      </Button>
-      
-      <Dialog  open={open} onClose={() => setOpen(false)}>
-        {/* <DialogTitle>Subscribe</DialogTitle> */}
-        <DialogContent>
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-      
-          </DialogContentText> */}
-          <form onSubmit={handleSubmit}>
-  <Typography   sx={{
-    fontStyle:'normal',
-    fontWeight:"bold",
-    display:"flex",
-    justifyContent:'center',
-    alignItems:'center',
-    mb:5
-  }} variant="h4">Login</Typography>
-  <TextField disabled={loading} size="small" required  type="email" autoFocus fullWidth label="Email" name="email" onChange={(e)=>setEmail(e.target.value)}></TextField>
-  <TextField disabled={loading} size="small" sx={{
-    mt:3,
-    mb:0.5
-  }} type="password" fullWidth label="Password" name="password" onChange={(e)=>setPassword(e.target.value)}></TextField>
-   
-
-  
-
-  {errors.map((err, index) => (
-  <div  key={index} style={{display:'flex',justifyContent:"center" ,marginTop:8}}>
-
-    <Alert severity="error" variant="standard" onClose={()=>seterrors([])} >
-    {err.msg}
-  </Alert>
-
-  </div>
-))}
- 
-<Button sx={{mt:2}} disabled={loading} size="medium" fullWidth variant="outlined" type="submit">{loading ? <Typography >Loading ...</Typography> : <Typography>Signin</Typography>}</Button>
-
-</form>
- {success && (
-  <Typography  variant="standard" style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
-    {success}  </Typography>
- )}
- <Typography sx={{fontSize:11, mt:2 ,textDecoration:'none'}} variant="caption" className="flex  justify-end  gap-1 items-center">Forgote  <Link href="/forgote" >forgote</Link></Typography>
-  <Typography sx={{
-  mb:1,
-
-  fontSize:11 ,textDecoration:'none'
-}}   variant="caption" className="flex  justify-end gap-1 ">Don’t have an account? <Link  sx={{}} href="/Create">Create</Link></Typography>
-
-        </DialogContent>
-       
-      </Dialog>
-
      <Container maxWidth="xs"  sx={{
 mt:8,
 mb:10
