@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Create.css";
 import axios from "axios";
+import { Alert, Box, Button, Container, Paper, TextField ,Typography} from '@mui/material'
 import {useNavigate}from 'react-router-dom'
 const Create = () => {
   const [firstname, setFirstname] = useState("");
@@ -47,72 +48,130 @@ if (res.data.status) {
   };
 
   return (
-    <div className="signup-container">
+    <>
+    <Container maxWidth="xs"  sx={{
+mt:8,
+mb:10,
+
+     }}>
+
+     
+          <Paper  elevation={3} sx={{
+          p:5,
+          py:9,
+          borderRadius:3
+        
+          }}>
+              <Typography   sx={{
+    // fontStyle:'normal',
+    // fontWeight:"bold",
+    display:"flex",
+    justifyContent:'center',
+    alignItems:'center',
+    mb:3
+  }} variant="h4">Signup</Typography>
+<form onSubmit={handleSubmit}>
+
+          <TextField sx={{    mt:3,
+    mb:0.5}} fullWidth name="text" type="text" label="First Name" size="small" onChange={(e)=>setFirstname(e.target.value)}> </TextField>
+          <TextField  sx={{    mt:3,
+    mb:0.5}} fullWidth name="text" type="text" label="Last Name" size="small" onChange={(e)=>setLastname(e.target.value)}> </TextField>
+          <TextField  sx={{    mt:3,
+    mb:0.5}} fullWidth name="text" type="email" label="Email" size="small" onChange={(e)=>setEmail(e.target.value)}> </TextField>
+          <TextField  sx={{    mt:3,
+    mb:0.5}} fullWidth name="text" type="password" label="Password" size="small" onChange={(e)=>setPassword(e.target.value)}> </TextField>
+
+</form>
+    <Box component={'div'}></Box>
+   {
+    error.map((err)=>(
+      <Alert severity="error" variant="standard"> {err.meg}</Alert>
+    ))
+   }
+    <Button  sx={{
+      mt:2,
+  
+
+    }} type="submit" fullWidth variant="outlined"> {loading ? <Typography>loading ...</Typography> : <Typography>Signup</Typography> }</Button>
+</Paper>
 
 
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <h2>Create Account</h2>
+     
 
-        <label>First Name</label>
-        <input
-          type="text"
-          name="text"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
-        />
 
-        <label>Last Name</label>
-        <input
-          type="text"
-          name="text"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-        />
 
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
+    </Container>
 
-        />
 
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+
+
+    </>
+//     <div className="signup-container">
+
+
+//       <form className="signup-form" onSubmit={handleSubmit}>
+//         <h2>Create Account</h2>
+
+//         <label>First Name</label>
+//         <input
+//           type="text"
+//           name="text"
+//           value={firstname}
+//           onChange={(e) => setFirstname(e.target.value)}
+//         />
+
+//         <label>Last Name</label>
+//         <input
+//           type="text"
+//           name="text"
+//           value={lastname}
+//           onChange={(e) => setLastname(e.target.value)}
+//         />
+
+//         <label>Email</label>
+//         <input
+//           type="email"
+//           name="email"
+//           value={email}
+//           required
+//           onChange={(e) => setEmail(e.target.value)}
+
+//         />
+
+//         <label>Password</label>
+//         <input
+//           type="password"
+//           name="password"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//         />
  
         
- {error.map((err, index) => (
-  <div  key={index} style={{display:'flex',justifyContent:"center"}}>
+//  {error.map((err, index) => (
+//   <div  key={index} style={{display:'flex',justifyContent:"center"}}>
 
-    <p  style={{ color: "red" }}>
-    {err.msg}
-  </p>
+//     <p  style={{ color: "red" }}>
+//     {err.msg}
+//   </p>
 
-  </div>
-))}
+//   </div>
+// ))}
 
-{success && (
-  <p style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
-    {success}
-  </p>
-)}
+// {success && (
+//   <p style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
+//     {success}
+//   </p>
+// )}
 
-        <p className="signin-links">
-          <span>
-            Already have an account? <a href="/signin">Sign In</a>
-          </span>
-        </p><br />
-        <button  type="submit">{loading ? <p>Loading ...</p>: <p>Sign Up</p>}</button>
+//         <p className="signin-links">
+//           <span>
+//             Already have an account? <a href="/signin">Sign In</a>
+//           </span>
+//         </p><br />
+//         <button  type="submit">{loading ? <p>Loading ...</p>: <p>Sign Up</p>}</button>
 
-      </form>
-    </div>
+//       </form>
+//     </div>
   );
 };
 
