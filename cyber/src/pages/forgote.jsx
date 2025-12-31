@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import {   useNavigate } from 'react-router-dom'
 import { Box,Link, Button, Container, Paper, TextField, Typography, Alert } from '@mui/material'
 import {} from '@mui/icons-material'
@@ -9,29 +10,48 @@ export const FORGOT = () => {
     const [success,setSuccess]=useState()
     const[loading,setLoading]=useState(false)
 
+=======
+import axios from "axios";
+export const FORGOT = () => {
+    const [email,setEmail]=useState()
+    const [data,setData]=useState()
+>>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
     const handler=async(e)=>{
        e.preventDefault();
 
 try {
+<<<<<<< HEAD
   setLoading(true)
  const res= await  axios.post("http://localhost:9000/forgote",{email},{withCredentials:true})
     if (res.data.status) {
         setSuccess( res.data.msg || "Password reset email sent successfully!")
         setErrors([])
 
+=======
+ const res= await  axios.post("http://localhost:9000/forgote",{email},{withCredentials:true})
+    if (res.data.status) {
+        
+        // setData(res.data.status)
+        console.log(res.data.msg);
+>>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
         
 
       }
 } catch (error) {
+<<<<<<< HEAD
         setErrors(error.response.data.errors)
   setSuccess("")
 
 }finally{
   setLoading(false)
+=======
+  
+>>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
 }
     }
   return (
     <>
+<<<<<<< HEAD
            <Container maxWidth="xs"  sx={{
          
       mt:8,
@@ -82,6 +102,12 @@ try {
       
       </Paper>
           </Container>
+=======
+      <form onSubmit={handler}>
+        <input type="email"name="email" placeholder="Enter your email"onChange={(e)=>setEmail(e.target.value)} />
+        <button type="submit">Forgot Password</button>
+      </form>
+>>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
     </>
   );
 };

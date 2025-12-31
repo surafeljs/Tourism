@@ -23,15 +23,25 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+<<<<<<< HEAD
+=======
+    "express": "^5.2.1",
+>>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
     "express-rate-limit": "^8.2.1",
     "express-validator": "^7.3.1",
     "jsonwebtoken": "^9.0.3",
     "nodemailer": "^7.0.12",
+<<<<<<< HEAD
     "pg": "^8.16.3",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
     "express": "^5.2.1",
     "nodemon": "^3.1.11"
+=======
+    "nodemon": "^3.1.11",
+    "pg": "^8.16.3",
+    "uuid": "^13.0.0"
+>>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
   }
 }

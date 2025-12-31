@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/signin.css";
 import axios  from "axios";
+<<<<<<< HEAD
 import {   useNavigate } from 'react-router-dom'
 import { Box,Link, Button, Container, Paper, TextField, Typography, Alert,  Dialog,
   DialogTitle,
@@ -12,6 +13,12 @@ const Signin = () => {
   const [email, setEmail] = useState();
 const [open, setOpen] = useState(false);
 
+=======
+import { useNavigate } from 'react-router-dom'
+
+const Signin = ({Token,setToken}) => {
+  const [email, setEmail] = useState();
+>>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
 
   const [password, setPassword] = useState();
 const[errors,seterrors]=useState([])
@@ -54,6 +61,7 @@ try {
   };
 
   return (
+<<<<<<< HEAD
     <>
 
 
@@ -116,6 +124,56 @@ mb:10
     
     </>
 
+=======
+    <div className="signin-container">
+      <form className="signin-form" onSubmit={handleSubmit}>
+        <h2>Sign In</h2>
+
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          disabled={loading}
+          required
+       onChange={(e)=>setEmail(e.target.value)}
+        
+       
+        />
+
+        <label>Password</label>
+        <input
+        disabled={loading}
+          type="password"
+          name="password"
+       onChange={(e)=>setPassword(e.target.value)}
+      
+        />
+ {errors.map((err, index) => (
+  <div  key={index} style={{display:'flex',justifyContent:"center"}}>
+
+    <p  style={{ color: "red" }}>
+    {err.msg}
+  </p>
+
+  </div>
+))}
+
+{success && (
+  <p style={{ color: "green", marginBottom: "10px",display:'flex',justifyContent:"center" }}>
+    {success}
+  </p>
+)}
+        
+<p className="signin-links">
+  
+  <span>forgote <a href="/forgote">forgote</a></span>
+  <span>Don’t have an account? <a href="/Create">Create</a></span>
+</p><br />
+        <button  type="submit">{loading ? <p>Loading ...</p>: <p>login</p>}</button>
+
+      </form>
+    </div>
+>>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
   );
 };
 
