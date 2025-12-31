@@ -281,7 +281,6 @@ if (!match) {
 router.post('/forgote',body('email').trim().isEmail().withMessage("Email is required"),async(req,res)=>{
 
   
-<<<<<<< HEAD
 const { email } = req.body;
 const errors = validationResult(req);
 
@@ -377,86 +376,6 @@ try {
         errors: [{ msg: 'Server error' }]
     });
 }
-=======
-                       const{email}=req.body
-  const errors=validationResult(req)
-                        if (!errors.isEmpty()) {
-                             console.log('Validation errors:', errors.array());
-            return res.status(400).json({
-                success: false,
-                errors: errors.array()
-            });
-                        }
-
-try {
-  const user =await pg_connection.query("SELECT *FROM create_account WHERE email = $1 ",[email])
-  
-const select_user_id=user.rows[0].user_id
-const token=jwt.sign({user_id:select_user_id},process.env.JWTSECRET,{expiresIn:'5m'})
-res.cookie("token", token, {
-  httpOnly: true,
-  secure: false,        // true ONLY for HTTPS
-  sameSite: "lax",      // IMPORTANT
-  maxAge: 5 * 60 * 1000
-});
-
-
-const link=`http://localhost:5173/reset/${token}`
-
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-const info={
-  from: `"My App" <${process.env.EMAIL_USER}>`,
-    to: `${email}`,
-    subject: "Welcome",
-    html: `
-  <h1>Welcome</h1>
-  <div>
-    <p>Password reset link:</p>
-    <a href="${link}">Reset Password</a>
-  </div>
-`,
-
-}
-
-
-
-   transporter.sendMail(info,(err,info)=>{
-    if (err) {
-     return  res.json({
-errors:[
-  {status:false},
-  {err:err.message},
-  {msg:"Email Not sent successfully"}
-  
-]  
-    })
-    }else{
-     return res.json({
-        status:true,
-        msg:"Email sent successfully",
-        token:token
-      })
-    }
-  })
-
-
-
-
-
-
-} catch (error) {
-  
-}
-
-
->>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
   
 
 })
@@ -536,13 +455,7 @@ router.get('/dashbord', async (req, res) => {
   if (!token) {
     return res.json({
       status: false,
-<<<<<<< HEAD
       msg: ' not Unauthorized'
-=======
-     errors:[
-      { msg: ' not Unauthorized'}
-     ]
->>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
     })
   }
 try {
@@ -555,14 +468,8 @@ res.json({
 } catch (error) {
   if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
     return res.status(401).json({
-<<<<<<< HEAD
       errors:[
         {status:false},
-=======
-           status:false,
-      errors:[
-   
->>>>>>> e42d0562989b330980cb860c232d7c0f1a37e1f7
         {msg:'invalide or Token expired'},
 
       ]

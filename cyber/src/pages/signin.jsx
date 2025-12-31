@@ -70,8 +70,8 @@ mb:10
 
 <form onSubmit={handleSubmit}>
   <Typography   sx={{
-    // fontStyle:'normal',
-    // fontWeight:"bold",
+    fontStyle:'normal',
+    fontWeight:"bold",
     display:"flex",
     justifyContent:'center',
     alignItems:'center',
