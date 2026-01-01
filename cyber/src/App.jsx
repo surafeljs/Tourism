@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 function App() {
  const [token, setToken] = useState(null);
  const [errror, setError] = useState();
-
+const [open, setOpen] = useState(false);
 
 useEffect(() => {
     const fetchData = async () => {
@@ -88,12 +88,14 @@ const logout=async()=>{
           }}
         >
           <img src={navbarlogo} alt="logo" width={80} />
-          <Typography variant="h6">Tourism Ethiopia</Typography>
+          <Typography variant="h6"sx={{
+        
+          }}>Tourism Ethiopia</Typography>
         </Box>
 
         {/* Mobile Menu Icon */}
         <Box sx={{ display: { xs: "block", md: "none" } }}>
-          <IconButton color="inherit">
+          <IconButton color="inherit" >
             <MenuIcon />
           </IconButton>
         </Box>
@@ -103,12 +105,14 @@ const logout=async()=>{
       <Box
         className="navlink"
         sx={{
+
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           width: "100%",
           alignItems: { xs: "stretch", md: "center" },
           justifyContent: "center",
           gap: 2,
+          
           mt: { xs: 2, md: 0 },
         }}
       >
@@ -124,11 +128,15 @@ const logout=async()=>{
             key={i}
             to={item.path}
             style={{
+             
+    backgroundColor: "rgba(0, 0, 0, 0.4)", // REQUIRED for blur to be visible
               width: "100%",
               textAlign: "center",
               padding: "8px 0",
               textDecoration: "none",
               color: "white",
+              borderRadius:4,
+             
             }}
           >
             {item.label}
@@ -139,6 +147,8 @@ const logout=async()=>{
         to={'/logout'}
           onClick={logout}
           style={{
+    backgroundColor: "rgba(0, 0, 0, 0.4)", // REQUIRED for blur to be visible
+    marginBottom:'45px',
             width: "100%",
             textAlign: "center",
             padding: "8px 0",
