@@ -66,46 +66,86 @@ const logout=async()=>{
 
               display:'flex',
               justifyContent:'space-between',
+    alignItems: "center",
+
                  flexDirection:{
                   xs:"column",
-                  sm:"row"
+                  sm:"column",
+                  md:"row"
                 },
              }}>
-               <Box className="logo" sx={{
-                display:'flex',
-                justifyContent:'center',
-                alignItems:'center',
-                gap:2
-               }}>
-                  <img src={navbarlogo} alt="logo" width={80}  />
-                  <Typography >Tourism Ethiopia</Typography>
-              </Box>
-              <Box className="navlink"  sx={{
-                display:'flex',
-                flexDirection:{
-                  xs:"column",
-                  sm:"row"
-                },
-                justifyContent:'space-between',
-                alignItems:'center',
-                gap:3
-               }}>
-  <Link to={'/'} className="link">Home</Link>
-  <Link to={'/gallery'}className="link">Gallery</Link>
-  <Link to={'/videos'}className="link">Videos</Link>
-  <Link to={'/about'}className="link">About</Link>
-  <Link to={'/contact'}className="link">Contact</Link>
-  <Link className='link' onClick={logout}> Log Out</Link>  
-              </Box>
               
-                <IconButton  color='inherit'sx={{
-                 display: {
-      xs: "block", 
-      sm: "none",   
-    },
-                }}  >
-                  <MenuIcon />
-                </IconButton>
+
+<Box
+  sx={{
+    display: "flex",
+    justifyContent: "space-between", // logo left, icon right
+    alignItems: "center",
+    width: "100%",
+  }}
+>
+  {/* Logo */}
+  <Box
+    className="logo"
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2, // spacing between logo image and text
+    }}
+  >
+    <img src={navbarlogo} alt="logo" width={80} />
+    <Typography variant="h6">Tourism Ethiopia</Typography>
+  </Box>
+
+  {/* Mobile Menu Icon */}
+  <Box sx={{ display: { xs: "block", sm: "block", md: "none" } }}>
+    <IconButton color="inherit">
+      <MenuIcon />
+    </IconButton>
+  </Box>
+</Box>
+
+ 
+<Box
+  className="navlink"
+sx={{
+
+display:'flex',
+justifyContent:'space-between',
+    alignItems: "center",
+
+gap:2,
+mt:3,
+
+mr:'auto',
+flexDirection:{
+  xs:'column',
+  md:'row'
+}
+  
+}}
+>
+  {["Home", "Gallery", "Videos", "About", "Contact", "LogOut"].map((text, i) => (
+    <Link
+      key={i}
+      to={text}
+   
+      style={{
+       width:'100%',
+
+        textAlign: "center",  // optional, centers text
+        backgroundColor: text === "Home" ? "red" : "transparent", // example
+        
+      }}
+    >
+      {text}
+    </Link>
+  ))}
+</Box>
+
+
+   
+    
              
              </Toolbar>
           </AppBar> 
