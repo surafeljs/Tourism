@@ -58,98 +58,100 @@ const logout=async()=>{
     <div className="App">
       
 <Router>
- 
-    <Box>
-
-       <AppBar className="navbar">
-             <Toolbar  sx={{
-
-              display:'flex',
-              justifyContent:'space-between',
-    alignItems: "center",
-
-                 flexDirection:{
-                  xs:"column",
-                  sm:"column",
-                  md:"row"
-                },
-             }}>
-              
-
-<Box
-  sx={{
-    display: "flex",
-    justifyContent: "space-between", // logo left, icon right
-    alignItems: "center",
-    width: "100%",
-  }}
->
-  {/* Logo */}
-  <Box
-    className="logo"
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2, // spacing between logo image and text
-    }}
-  >
-    <img src={navbarlogo} alt="logo" width={80} />
-    <Typography variant="h6">Tourism Ethiopia</Typography>
-  </Box>
-
-  {/* Mobile Menu Icon */}
-  <Box sx={{ display: { xs: "block", sm: "block", md: "none" } }}>
-    <IconButton color="inherit">
-      <MenuIcon />
-    </IconButton>
-  </Box>
-</Box>
-
- 
-<Box
-  className="navlink"
-sx={{
-
-display:'flex',
-justifyContent:'space-between',
-    alignItems: "center",
-
-gap:2,
-mt:3,
-
-mr:'auto',
-flexDirection:{
-  xs:'column',
-  md:'row'
-}
-  
-}}
->
-  {["Home", "Gallery", "Videos", "About", "Contact", "LogOut"].map((text, i) => (
-    <Link
-      key={i}
-      to={text}
-   
-      style={{
-       width:'100%',
-
-        textAlign: "center",  // optional, centers text
-        backgroundColor: text === "Home" ? "red" : "transparent", // example
-        
+<Box>
+  <AppBar className="navbar">
+    <Toolbar
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexDirection: { xs: "column", md: "row" },
+        width: "100%",
       }}
     >
-      {text}
-    </Link>
-  ))}
+      {/* Logo + Menu */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        {/* Logo */}
+        <Box
+          className="logo"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <img src={navbarlogo} alt="logo" width={80} />
+          <Typography variant="h6">Tourism Ethiopia</Typography>
+        </Box>
+
+        {/* Mobile Menu Icon */}
+        <Box sx={{ display: { xs: "block", md: "none" } }}>
+          <IconButton color="inherit">
+            <MenuIcon />
+          </IconButton>
+        </Box>
+      </Box>
+
+      {/* Nav Links */}
+      <Box
+        className="navlink"
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          width: "100%",
+          alignItems: { xs: "stretch", md: "center" },
+          justifyContent: "center",
+          gap: 2,
+          mt: { xs: 2, md: 0 },
+        }}
+      >
+        {[
+          { label: "Home", path: "/" },
+          { label: "Gallery", path: "/gallery" },
+          { label: "Videos", path: "/videos" },
+          { label: "About", path: "/about" },
+          { label: "Contact", path: "/contact" },
+          { label: "Signin", path: "/signin" },
+        ].map((item, i) => (
+          <Link
+            key={i}
+            to={item.path}
+            style={{
+              width: "100%",
+              textAlign: "center",
+              padding: "8px 0",
+              textDecoration: "none",
+              color: "white",
+            }}
+          >
+            {item.label}
+          </Link>
+        ))}
+
+        <Link
+        to={'/logout'}
+          onClick={logout}
+          style={{
+            width: "100%",
+            textAlign: "center",
+            padding: "8px 0",
+            cursor: "pointer",
+          }}
+        >
+          LogOut
+        </Link>
+      </Box>
+    </Toolbar>
+  </AppBar>
 </Box>
 
-
-   
-    
-             
-             </Toolbar>
-          </AppBar> 
-    </Box> 
 {/*             
   //    <Box>
   //           <AppBar className="navbar">
