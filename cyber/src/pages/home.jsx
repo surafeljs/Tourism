@@ -1,13 +1,22 @@
 import React from 'react';
 import { CopyWrite } from '../components/copywrite';
 import '../styles/copywrite.css'
-import '../styles/home.css'
-import lalibela from '../../public/images/section/lalibela.jpg'
-import abay from '../../public/images/section/abay.jpeg'
-import lalibela1 from '../../public/images/section/lalibela (1).jpg'
-import konso from '../../public/images/section/konso.jpg'
-import sof from '../../public/images/section/sof.jpeg'
-import harar from '../../public/images/section/harar.jpeg'
+
+
+
+
+// import lalibela from '../../public/images/section/lalibela.jpg'
+// import abay from '../../public/images/section/abay.jpeg'
+// import lalibela1 from '../../public/images/section/lalibela (1).jpg'
+// import konso from '../../public/images/section/konso.jpg'
+// import sof from '../../public/images/section/sof.jpeg'
+// import harar from '../../public/images/section/harar.jpeg'
+
+
+
+
+
+
 
 
 export const Home=({token})=>{
@@ -19,7 +28,7 @@ export const Home=({token})=>{
 <>
 
 
-<section>
+{/* <section>
 <div className="img">
 <img src={lalibela} alt="lalibela"  />
 <h2>Welcome to {token} The Land of Origins</h2>
@@ -58,7 +67,7 @@ export const Home=({token})=>{
         <img src={lalibela1} alt=""  />
 
 
-    </section>
+    </section> */}
 
 <CopyWrite/>
 </>

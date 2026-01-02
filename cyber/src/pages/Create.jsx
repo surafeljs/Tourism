@@ -52,7 +52,6 @@ if (res.data.status) {
     <Container maxWidth="xs"  sx={{
 mt:8,
 mb:10,
-
      }}>
 
      
@@ -63,8 +62,8 @@ mb:10,
         
           }}>
               <Typography   sx={{
-    // fontStyle:'normal',
-    // fontWeight:"bold",
+    fontStyle:'normal',
+    fontWeight:"bold",
     display:"flex",
     justifyContent:'center',
     alignItems:'center',
@@ -80,19 +79,21 @@ mb:10,
     mb:0.5}} fullWidth name="text" type="email" label="Email" size="small" onChange={(e)=>setEmail(e.target.value)}> </TextField>
           <TextField  sx={{    mt:3,
     mb:0.5}} fullWidth name="text" type="password" label="Password" size="small" onChange={(e)=>setPassword(e.target.value)}> </TextField>
-
-</form>
-    <Box component={'div'}></Box>
    {
-    error.map((err)=>(
-      <Alert severity="error" variant="standard"> {err.meg}</Alert>
+    error.map((err,index)=>(
+      <Alert  key={index}  severity="error" variant="standard"   > {err.msg}</Alert>
     ))
    }
-    <Button  sx={{
+  <Button  sx={{
       mt:2,
   
 
     }} type="submit" fullWidth variant="outlined"> {loading ? <Typography>loading ...</Typography> : <Typography>Signup</Typography> }</Button>
+</form>
+    <Box component={'div'}>
+  
+  
+    </Box>
 </Paper>
 
 
