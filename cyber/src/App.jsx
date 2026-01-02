@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import navbarlogo from '../public/images/navbar/navbarlogo.png'
 import {BrowserRouter as Router,Routes,Route,Link, Navigate, replace} from 'react-router-dom'
-import './/styles/app.css'
+import './styles/app.css'
 import { Home } from './pages/home'
 import Create from './pages/Create'
 import Signin from './pages/signin'
@@ -35,6 +35,23 @@ useEffect(() => {
 
     fetchData();
   }, []);
+const menuicon = () => {
+  const menu = document.getElementById("mobileMenu");
+  const currentDisplay = getComputedStyle(menu).display;
+
+
+  if (currentDisplay === "flex" || currentDisplay === "block") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "flex"; 
+    menu.style.flexDirection = "column";
+    
+    
+  }
+};
+
+
+
 if (errror) {
   return
 }
@@ -62,6 +79,7 @@ const logout=async()=>{
   <AppBar className="navbar">
     <Toolbar
       sx={{
+
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -88,14 +106,14 @@ const logout=async()=>{
           }}
         >
           <img src={navbarlogo} alt="logo" width={80} />
-          <Typography variant="h6"sx={{
+          <Typography   variant="h6"sx={{
         
           }}>Tourism Ethiopia</Typography>
         </Box>
 
         {/* Mobile Menu Icon */}
-        <Box sx={{ display: { xs: "block", md: "none" } }}>
-          <IconButton color="inherit" >
+        <Box sx={{ display: { xs: "block", md: "none" } }} >
+          <IconButton color="inherit" onClick={menuicon} >
             <MenuIcon />
           </IconButton>
         </Box>
@@ -103,16 +121,15 @@ const logout=async()=>{
 
       {/* Nav Links */}
       <Box
-        className="navlink"
+       id="mobileMenu"
         sx={{
-
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           width: "100%",
           alignItems: { xs: "stretch", md: "center" },
           justifyContent: "center",
           gap: 2,
-          
+        
           mt: { xs: 2, md: 0 },
         }}
       >
