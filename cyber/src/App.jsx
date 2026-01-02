@@ -75,11 +75,14 @@ const logout=async()=>{
     <div className="App">
       
 <Router>
-<Box>
+<Box sx={{
+marginBottom:15,
+
+}}>
   <AppBar className="navbar">
     <Toolbar
+    
       sx={{
-
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -146,7 +149,7 @@ const logout=async()=>{
             to={item.path}
             style={{
              
-    backgroundColor: "rgba(0, 0, 0, 0.4)", // REQUIRED for blur to be visible
+             backgroundColor: "rgba(0, 0, 0, 0.4)", // REQUIRED for blur to be visible
               width: "100%",
               textAlign: "center",
               padding: "8px 0",
