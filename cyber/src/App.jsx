@@ -147,9 +147,11 @@ const logout=async()=>{
         to={'/logout'}
           onClick={logout}
           style={{
-    backgroundColor: "rgba(0, 0, 0, 0.4)", // REQUIRED for blur to be visible
-    marginBottom:'45px',
+              backgroundColor: "rgba(0, 0, 0, 0.4)", // REQUIRED for blur to be visible
+               marginBottom:'45px',
             width: "100%",
+              borderRadius:4,
+marginBottom:2,
             textAlign: "center",
             padding: "8px 0",
             cursor: "pointer",
