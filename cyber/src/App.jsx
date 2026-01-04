@@ -35,20 +35,12 @@ useEffect(() => {
 
     fetchData();
   }, []);
-const menuicon = () => {
-  const menu = document.getElementById("mobileMenu");
-  const currentDisplay = getComputedStyle(menu).display;
+// const menuicon = () => {
+//   const menu = document.querySelector(".mobileMenu");
+//   menu.classList.toggle('toggle')
 
-
-  if (currentDisplay === "flex" || currentDisplay === "block") {
-    menu.style.display = "none";
-  } else {
-    menu.style.display = "flex"; 
-    menu.style.flexDirection = "column";
-    
-    
-  }
-};
+// };
+console.log(open);
 
 
 
@@ -79,7 +71,10 @@ const logout=async()=>{
 marginBottom:15,
 
 }}>
-  <AppBar className="navbar">
+  <AppBar className="navbar" sx={{
+        backgroundColor:'#222831',
+
+  }}>
     <Toolbar
     
       sx={{
@@ -109,14 +104,16 @@ marginBottom:15,
           }}
         >
           <img src={navbarlogo} alt="logo" width={80} />
-          <Typography   variant="h6"sx={{
+          <Typography 
+className='mm ss'
+             variant="h6"sx={{
         
           }}>Tourism Ethiopia</Typography>
         </Box>
 
         {/* Mobile Menu Icon */}
         <Box sx={{ display: { xs: "block", md: "none" } }} >
-          <IconButton color="inherit" onClick={menuicon} >
+          <IconButton color="inherit" onClick={()=>setOpen(!open)} >
             <MenuIcon />
           </IconButton>
         </Box>
@@ -124,9 +121,10 @@ marginBottom:15,
 
       {/* Nav Links */}
       <Box
-       id="mobileMenu"
+      //  className={open ? 'mobileMenu' :'toggle'}
+  className={`mobileMenu ${open ? 'toggle' : ''}`}
         sx={{
-          display: "flex",
+          display: {xs:'none',md:"flex"},
           flexDirection: { xs: "column", md: "row" },
           width: "100%",
           alignItems: { xs: "stretch", md: "center" },
@@ -145,6 +143,7 @@ marginBottom:15,
           { label: "Signin", path: "/signin" },
         ].map((item, i) => (
           <Link
+          
             key={i}
             to={item.path}
             style={{

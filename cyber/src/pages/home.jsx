@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CopyWrite } from '../components/copywrite';
 import '../styles/copywrite.css'
+import '../styles/home.css'
 
 
 
+import{   Autocomplete, Box, Button, ButtonGroup, Checkbox, Container, Divider, FormControl, FormControlLabel, FormGroup, FormLabel, ListItem, MenuItem, Paper, Snackbar, Stack, Switch, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
 
-// import lalibela from '../../public/images/section/lalibela.jpg'
+ import lalibela from '../../public/images/section/lalibela.jpg'
 // import abay from '../../public/images/section/abay.jpeg'
 // import lalibela1 from '../../public/images/section/lalibela (1).jpg'
 // import konso from '../../public/images/section/konso.jpg'
@@ -17,17 +19,47 @@ import '../styles/copywrite.css'
 
 
 
-
-
 export const Home=({token})=>{
- 
+
+
 
 
 
     return(
 <>
 
+<Container maxWidth={false} className='welcome_page_container' >
+  
 
+  <Box className='welcome_page'sx={{position:'relative'}}>
+<Paper elevation={10}>
+
+
+           <Box
+      component="img"
+      src={lalibela}
+      alt="lalibela"
+      sx={{
+        width: '100%',    
+        objectFit:'cover',  // image takes full width of parent
+        height: {md:'auto',lg:600},     // keeps aspect ratio
+        borderRadius: 2,    // optional: rounded corners
+      }}
+    />
+</Paper>
+<Box   sx={{
+
+}}>
+
+
+    <Typography variant='h4'sx={{       backgroundColor: 'rgba(0,0,0,0.4)', padding: '10px 100px',borderRadius:2,backdropFilter:'blur(20px)', position:'absolute', display:{xs:'none',sm:'none',md:'none',lg:'flex',float:'rig'},  top:'80%', left:'50%',  transform: 'translate(-50%,-50%)',  wordSpacing:5, fontSize:'clamp(30px,2vw,80px)', fontWeight:700,color:'white'}} className='h2'>Welcome to  The Land of Origins</Typography>
+
+</Box>
+
+       
+  </Box>
+
+</Container>
 {/* <section>
 <div className="img">
 <img src={lalibela} alt="lalibela"  />
