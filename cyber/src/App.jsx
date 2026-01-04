@@ -71,7 +71,7 @@ const logout=async()=>{
 marginBottom:15,
 
 }}>
-  <AppBar className="navbar" sx={{
+  <AppBar  className="navbar" sx={{
         backgroundColor:'#222831',
 
   }}>
