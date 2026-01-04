@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { CopyWrite } from '../components/copywrite';
 import '../styles/copywrite.css'
 import '../styles/home.css'
@@ -17,12 +17,22 @@ import harar from '../../public/images/section/harar.jpeg'
 
 
 
+const images = [lalibela,sof, konso, abay];
 
 
 
 export const Home=({token})=>{
 
+const [index, setIndex] = useState(0);
 
+useEffect(() => {
+  const interval = setInterval(() => {
+    setIndex(prev => (prev + 1) % images.length);
+    
+  }, 10000);
+  
+  return () => clearInterval(interval);
+}, []);
 
 
 
@@ -38,17 +48,23 @@ export const Home=({token})=>{
 
 
            <Box
+           className='image_slider_animation'
       component="img"
-      src={lalibela}
+     src={images[index]}
       alt="lalibela"
       sx={{
         width: '100%',    
         objectFit:'cover', 
         height: {md:'auto',lg:500},     
-        borderRadius: 2,    
+        borderRadius: 2, 
+        opacity:5,
+            transition: 'opacity 1s ease-in-out',
+  
       }}
     />
+    
 </Paper>
+
 <Box   sx={{
 
 }}>
@@ -80,6 +96,26 @@ export const Home=({token})=>{
 <Divider sx={{color:'#90AB8B',fontWeight:500, letterSpacing:6,}}>Tourism Ethiopia</Divider>
 
 
+<Container  maxWidth={false} >
+
+
+  <Stack spacing={3} justifyContent={"center"} alignItems="center" textAlign={'center'}>
+
+  <Typography sx={{
+    color:'#90AB8B',
+           fontSize:'clamp(30px,3vw,80px)', 
+
+  }} >Places to visit in Ethiopia</Typography>
+  <Typography variant='h6' sx={{ 
+    
+        color:'#90AB8B',
+
+ maxWidth: 900,  
+
+          }}>Places to visit in Ethiopia
+Jagged peaks in the Simien Mountains, towering limestone cliffs in Tigray, thick jungle thickets in the Bale Mountains, neon acid springs of cinder cone volcanoes in the Danakil Depression. Combined with Ethiopia's cultural diversity and historic monuments, the possibilities for adventure are endless. </Typography>
+</Stack>
+</Container>
 
 
   
@@ -105,7 +141,7 @@ export const Home=({token})=>{
 
     {/* Text Content */}
     <Box sx={{ maxWidth: 500 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography sx={{color:'#90AB8B',fontWeight:700}} variant="h4" gutterBottom>
         Welcome to Ethiopia
       </Typography>
 
