@@ -34,7 +34,7 @@ export const Home=({token})=>{
   
 
   <Box className='welcome_page'sx={{position:'relative'}}>
-<Paper elevation={10}>
+<Paper elevation={3}>
 
 
            <Box
@@ -43,9 +43,9 @@ export const Home=({token})=>{
       alt="lalibela"
       sx={{
         width: '100%',    
-        objectFit:'cover',  // image takes full width of parent
-        height: {md:'auto',lg:500},     // keeps aspect ratio
-        borderRadius: 2,    // optional: rounded corners
+        objectFit:'cover', 
+        height: {md:'auto',lg:500},     
+        borderRadius: 2,    
       }}
     />
 </Paper>
@@ -77,7 +77,8 @@ export const Home=({token})=>{
 
 </Container>
 
-<Divider>Tourism Ethiopia</Divider>
+<Divider sx={{color:'#90AB8B',fontWeight:500, letterSpacing:6,}}>Tourism Ethiopia</Divider>
+
 
 
 
@@ -138,7 +139,7 @@ export const Home=({token})=>{
 
 
 
-<Divider>Tourism Ethiopia</Divider>
+<Divider sx={{fontWeight:500, letterSpacing:6, color:'#90AB8B'}}>Tourism Ethiopia</Divider>
 
 
 
@@ -151,8 +152,10 @@ export const Home=({token})=>{
 
 
 <Container maxWidth={false}>
+  <Typography sx={{fontWeight:500, letterSpacing:6,color:'#90AB8B', display:'flex', pb:2,justifyContent:"center",fontSize:'clamp(20px,2vw,80px)'}} variant='h4'>Discovery Ethiopia</Typography>
   <Paper elevation={1} sx={{  borderRadius:8, py:{xs:1,md:15}, px:{xs:1,md:5},}}>
   <Stack
+  
     spacing={5}
     direction="row"
     justifyContent="space-around"
