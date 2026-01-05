@@ -6,7 +6,7 @@ import '../styles/home.css'
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-import{   Autocomplete, Box, Button, ButtonGroup, Checkbox, Container, Divider, FormControl, FormControlLabel, FormGroup, FormLabel, ListItem, MenuItem, Paper, Snackbar, Stack, Switch, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
+import{   Autocomplete, Box,IconButton, Button, ButtonGroup, Checkbox, Container, Divider, FormControl, FormControlLabel, FormGroup, FormLabel, ListItem, MenuItem, Paper, Snackbar, Stack, Switch, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
 
  import lalibela from '../../public/images/section/lalibela.jpg'
 import abay from '../../public/images/section/abay.jpeg'
@@ -29,10 +29,48 @@ useEffect(() => {
   const interval = setInterval(() => {
     setIndex(prev => (prev + 1) % images.length);
     
-  }, 10000);
+  }, 20000);
   
   return () => clearInterval(interval);
 }, []);
+
+
+
+
+
+
+
+
+
+
+
+ const [indexs, setIndexs] = useState(0);
+
+  // const next = () => {
+  //   setIndexs((prev) => (prev + 1) % images.length);
+  // };
+
+  // const prev = () => {
+  //   setIndexs((prev) => (prev - 1 + images.length) % images.length);
+  // };
+
+  // Auto slide
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndexs((prev) => (prev + 1) % images.length);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -43,53 +81,64 @@ useEffect(() => {
   <Container maxWidth={false} className='welcome_page_container' >
   
 
-  <Box className='welcome_page'sx={{position:'relative'}}>
-<Paper elevation={3}>
+ <Box className="welcome_page" sx={{ position: "relative", width: "100%" }}>
+  <Paper
+    elevation={3}
+    sx={{
+      position: "relative",
+      width: "100%",
+      height: { xs: 250, md: 350, lg: 500 },
+      overflow: "hidden",
+      borderRadius: 3,
+    }}
+  >
+    {images.map((item, i) => (
+      <Box
+        key={i}
+        component="img"
+        src={item}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+   width: '100%', 
+               height: {md:'auto',lg:500}, 
+          objectFit: "cover",
+          opacity: i === index ? 1 : 0,
+          transition: "opacity 0.6s ease-in-out",
+        }}
+      />
+    ))}
 
-
-           <Box
-           className='image_slider_animation'
-      component="img"
-     src={images[index]}
-      alt="lalibela"
+    {/* ✅ TEXT OVERLAY */}
+    <Typography
+      variant="h4"
       sx={{
-        width: '100%',    
-        objectFit:'cover', 
-        height: {md:'auto',lg:500},     
-        borderRadius: 2, 
-        opacity:5,
-            transition: 'opacity 1s ease-in-out',
-  
+        position: "absolute",
+        zIndex: 2,
+        top: "80%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+
+        backgroundColor: "rgba(0,0,0,0.4)",
+        backdropFilter: "blur(20px)",
+        padding: "10px 30px",
+        borderRadius: 2,
+
+        display: { xs: "none", lg: "flex" },
+        fontSize: "clamp(30px, 2vw, 80px)",
+        fontWeight: 500,
+        letterSpacing: 2,
+        wordSpacing: 5,
+        color: "white",
+        textAlign: "center",
       }}
-    />
-    
-</Paper>
-
-<Box   sx={{
-
-}}>
-
-
-    <Typography variant='h4'sx={{
-      backgroundColor: 'rgba(0,0,0,0.4)', 
-      padding: '10px 100px',
-      borderRadius:2,
-      backdropFilter:'blur(20px)', 
-      position:'absolute', 
-      display:{xs:'none',sm:'none',md:'none',lg:'flex'}, 
-       top:'80%',
-        left:'50%', 
-         transform: 'translate(-50%,-50%)', 
-          wordSpacing:5,
-           fontSize:'clamp(30px,2vw,80px)', 
-           fontWeight:500,
-           color:'white'
-           }} className='h2'>Welcome to  The Land of Origins</Typography>
-
+    >
+      Welcome to The Land of Origins
+    </Typography>
+  </Paper>
 </Box>
 
-       
-  </Box>
 
 </Container>
 
@@ -187,45 +236,47 @@ Jagged peaks in the Simien Mountains, towering limestone cliffs in Tigray, thick
   
 
 
-<Container maxWidth={false}>
+<Container maxWidth={false}  >
   <Typography sx={{fontWeight:500, letterSpacing:6,color:'#90AB8B', display:'flex', pb:2,justifyContent:"center",fontSize:'clamp(20px,2vw,80px)'}} variant='h4'>Discovery Ethiopia</Typography>
   <Paper elevation={1} sx={{  borderRadius:8, py:{xs:1,md:15}, px:{xs:1,md:5},}}>
   <Stack
   
     spacing={5}
-    direction="row"
-    justifyContent="space-around"
+    direction={
+     { xs:'column',lg:"row"}
+    }
+    justifyContent="center"
+    alignItems={'center'}
+    textAlign={'center'}
   >
-    <Box
-      component="img"
-      src={konso}
-      alt="konso"
-      sx={{borderRadius:3, width: 350, height: 250, objectFit: "cover" }}
-    />
 
-    <Box
-      component="img"
-      src={sof}
-      alt="sof"
-      sx={{borderRadius:3, width: 350, height: 250, objectFit: "cover" }}
 
-    />
 
-    <Box
-      component="img"
-      src={harar}
-      alt="harar"
-      sx={{borderRadius:3, width: 350, height: 250, objectFit: "cover" }}
+{images.map((item,i)=>(
+<Box
+key={i}
+            component="img"
+            src={item}
+             sx={{
+              borderRadius:3,
+          width: { xs: "100%", md: 300 },
+        height: { xs: 300, md: 200 },
+                 objectFit: "cover",
+                  opacity: i === index ? 1 : 0.5, 
+              transition: "opacity 0.6s ease",
+             }}
+           
+          /> 
 
-    />
+))}
 
-    <Box
-      component="img"
-      src={lalibela1}
-      alt="lalibela"
-         sx={{borderRadius:3, width: 350, height: 250, objectFit: "cover" }}
 
-    />
+
+
+
+
+
+
   </Stack>
   </Paper>
 </Container>
